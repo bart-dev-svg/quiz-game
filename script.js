@@ -23,9 +23,12 @@ const feedback = document.getElementById("feedback");
 const nextButton = document.getElementById("nextButton");
 
 let currentIndex = 0;
+let score = 0;
+let answered = false;
 
 function showQuestion() {
   const q = questions[currentIndex];
+  answered = false;
 
   progress.textContent = "Question " + (currentIndex + 1) + " of " + questions.length;
   questionEl.textContent = q.question;
@@ -37,7 +40,13 @@ function showQuestion() {
     button.textContent = q.answers[i];
 
     button.addEventListener("click", function () {
+      if (answered) {
+        return;
+      }
+      answered = true;
+
       if (i === q.correct) {
+        score = score + 1;
         feedback.textContent = "Correct!";
       } else {
         feedback.textContent = "Not quite. The answer is: " + q.answers[q.correct];
@@ -49,13 +58,14 @@ function showQuestion() {
 }
 
 showQuestion();
+
 nextButton.addEventListener("click", function () {
   currentIndex = currentIndex + 1;
 
   if (currentIndex < questions.length) {
     showQuestion();
   } else {
-    questionEl.textContent = "Quiz finished!";
+    questionEl.textContent = "Quiz finished! You scored " + score + " out of " + questions.length;
     answersEl.innerHTML = "";
     feedback.textContent = "";
     progress.textContent = "";
