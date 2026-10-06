@@ -49,3 +49,16 @@ function showQuestion() {
 }
 
 showQuestion();
+nextButton.addEventListener("click", function () {
+  currentIndex = currentIndex + 1;
+
+  if (currentIndex < questions.length) {
+    showQuestion();
+  } else {
+    questionEl.textContent = "Quiz finished!";
+    answersEl.innerHTML = "";
+    feedback.textContent = "";
+    progress.textContent = "";
+    nextButton.style.display = "none";
+  }
+});
