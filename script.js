@@ -70,5 +70,15 @@ nextButton.addEventListener("click", function () {
     feedback.textContent = "";
     progress.textContent = "";
     nextButton.style.display = "none";
+
+    const restartButton = document.createElement("button");
+    restartButton.textContent = "Play again";
+    restartButton.addEventListener("click", function () {
+      currentIndex = 0;
+      score = 0;
+      nextButton.style.display = "inline-block";
+      showQuestion();
+    });
+    answersEl.appendChild(restartButton);
   }
 });
